@@ -1,4 +1,6 @@
 using Backend.Data;
+using Backend.Models;
+using Backend.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,7 +10,10 @@ var connStr = builder.Configuration.GetConnectionString("Database") ?? throw new
 builder.Services.AddDbContext<DataContext>(x => x.UseSqlServer(connStr));
 
 // Add services to the container.
+builder.Services.AddRepositories();
 builder.Services.AddControllers();
+builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddModelOptions(builder.Configuration);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
