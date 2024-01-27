@@ -37,17 +37,25 @@ public class AuthController(IUserRepository userRepository, IOptions<JwtOptions>
     }
 
     [HttpPost("[action]")]
-    public async Task<IActionResult> Register()
+    public async Task<IActionResult> Register(RegisterDto dto)
     {
-        return Created();
+        var hasUser = await _userRepository.AnyAsync(x => x.Email == dto.Email);
+        if (hasUser) return BadRequest("Email exists.");
+
+        var user = _mapper.Map<User>(dto);
+        user.PasswordHash = AuthHelper.HashPassword(dto.Password);
+
+        await _userRepository.CreateAsync(user);
+        await _userRepository.SaveAsync();
+
+        var jwt = GenerateJWT(user);
+        return Ok(new { jwt });
     }
 
     private string GenerateJWT(User user)
     {
         var claims = new List<Claim>()
         {
-            new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new(ClaimTypes.NameIdentifier, user.Id.ToString()),
             new(ClaimTypes.Name, user.Name),
             new(ClaimTypes.Role, user.UserType.ToString())
         };

@@ -12,7 +12,7 @@ public abstract class Repository<T>(DataContext dataContext) : IRepository<T> wh
 
     public async Task CreateAsync(T entity)
     {
-        await _dataContext.AddAsync(entity);
+        await _set.AddRangeAsync(entity);
     }
 
     public async Task<T?> FirstOrDefaultAsync(Expression<Func<T, bool>> expression)
@@ -23,5 +23,10 @@ public abstract class Repository<T>(DataContext dataContext) : IRepository<T> wh
     public async Task SaveAsync()
     {
         await _dataContext.SaveChangesAsync();
+    }
+
+    public async Task<bool> AnyAsync(Expression<Func<T, bool>> expression)
+    {
+        return await _set.AnyAsync(expression);
     }
 }

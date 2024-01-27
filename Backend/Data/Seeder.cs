@@ -10,10 +10,10 @@ public static class Seeder
         var scope = application.ApplicationServices.CreateScope();
         var context = scope.ServiceProvider.GetRequiredService<DataContext>();
 
-        context.AddAdmin();
+        context.AddAdminUser();
     }
 
-    private static void AddAdmin(this DataContext context)
+    private static void AddAdminUser(this DataContext context)
     {
         if (context.Users.Any()) return;
 
