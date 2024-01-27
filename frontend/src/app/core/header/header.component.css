@@ -1,0 +1,12 @@
+.spacer {
+    flex: 1 1 auto;
+}
+
+.button-row .mat-mdc-button-base {
+    margin: 8px 8px 8px 0;
+}
+
+.link-no-styles {
+    color: white;
+    text-decoration: none;
+}
