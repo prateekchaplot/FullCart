@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { StorageService } from '../../shared/services/storage.service';
 import { Router } from '@angular/router';
+import { AppService } from '../../shared/services/app.service';
+import { User } from '../../shared/models/user';
 
 @Component({
   selector: 'app-header',
@@ -9,8 +11,15 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent {
   title = 'Full Cart';
+  isLoggedIn = false;
+  user: User | undefined;
 
-  constructor(private storageService: StorageService, private router: Router) {}
+  constructor(private storageService: StorageService, private router: Router, private appService: AppService) {
+    this.appService.isLoggedIn$.subscribe(isLoggedIn => {
+      this.isLoggedIn = isLoggedIn;
+      this.user = isLoggedIn ? this.appService.user : undefined;
+    });
+  }
 
   onLogout() {
     this.storageService.removeToken();

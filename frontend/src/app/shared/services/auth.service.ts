@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { BaseService } from './base.service';
 import { Observable } from 'rxjs';
 import { StorageService } from './storage.service';
-import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -17,15 +16,5 @@ export class AuthService {
 
   register(name: string, email: string, password: string): Observable<any> {
     return this.baseService.post('/auth/register', { name, email, password });
-  }
-
-  decodeToken() {
-    let token = this.storageService.getToken();
-    if (token) {
-      let decodedToken = jwtDecode(token);
-      return decodedToken;
-    }
-
-    return null;
   }
 }

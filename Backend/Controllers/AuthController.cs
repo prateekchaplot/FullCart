@@ -56,8 +56,9 @@ public class AuthController(IUserRepository userRepository, IOptions<JwtOptions>
     {
         var claims = new List<Claim>()
         {
-            new(ClaimTypes.Name, user.Name),
-            new(ClaimTypes.Role, user.UserType.ToString())
+            new("name", user.Name),
+            new("email", user.Email),
+            new("role", user.UserType.ToString())
         };
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtOptions.Value.Key));

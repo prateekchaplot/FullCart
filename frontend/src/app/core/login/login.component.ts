@@ -13,12 +13,12 @@ export class LoginComponent {
   password = '';
 
   constructor(
-    private authSerivce: AuthService,
+    private authService: AuthService,
     private storageService: StorageService,
     private router: Router) {}
 
   onLogin() {
-    this.authSerivce.login(this.email, this.password)
+    this.authService.login(this.email, this.password)
     .subscribe(response => {
       const token = response.jwt;
       if (token) {
