@@ -16,7 +16,7 @@ export class StorageService {
 
   removeToken() {
     this.appService.isLoggedIn$.next(false);
-    this.appService.user = null;
+    this.appService.user = undefined;
     localStorage.removeItem('token');
   }
 

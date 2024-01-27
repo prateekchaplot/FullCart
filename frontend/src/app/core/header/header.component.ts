@@ -12,12 +12,14 @@ import { User } from '../../shared/models/user';
 export class HeaderComponent {
   title = 'Full Cart';
   isLoggedIn = false;
+  isAdmin = false;
   user: User | undefined;
 
   constructor(private storageService: StorageService, private router: Router, private appService: AppService) {
     this.appService.isLoggedIn$.subscribe(isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
       this.user = isLoggedIn ? this.appService.user : undefined;
+      this.isAdmin = isLoggedIn && this.user?.role == 'ADMIN';
     });
   }
 

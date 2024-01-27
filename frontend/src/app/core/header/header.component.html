@@ -1,8 +1,14 @@
 <mat-toolbar>
   <mat-toolbar-row>
     <span><a href="/" class="link-no-styles">{{ title }}</a></span>
+    <div class="menu">
+      <a href="brand" *ngIf="isAdmin" class="menu-item link-no-styles">Brands</a>
+      <a href="category" *ngIf="isAdmin" class="menu-item link-no-styles">Categories</a>
+      <a href="inventory" *ngIf="isAdmin" class="menu-item link-no-styles">Inventory</a>
+      <a href="orders" *ngIf="isAdmin" class="menu-item link-no-styles">Orders</a>
+    </div>
     <span class="spacer"></span>
-    <span *ngIf="isLoggedIn" class="user-info">{{ user?.name }}</span>
+    <span *ngIf="isLoggedIn" class="user-info">{{ user?.email }}</span>
     <mat-chip-option *ngIf="isLoggedIn" class="user-info">{{ user?.role | titlecase }}</mat-chip-option>
     <div class="button-row">
       <a *ngIf="!isLoggedIn" mat-flat-button href="register">Register</a>

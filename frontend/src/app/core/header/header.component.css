@@ -2,12 +2,14 @@
     flex: 1 1 auto;
 }
 
-.button-row .mat-mdc-button-base {
+.button-row .mat-mdc-button-base, .user-info {
     margin: 8px 8px 8px 0;
 }
 
-.user-info {
-    margin: 8px 8px 8px 0;
+.menu .menu-item {
+    margin: 16px 0 16px 16px;
+    font-weight: lighter;
+    font-size: large;
 }
 
 .link-no-styles {
