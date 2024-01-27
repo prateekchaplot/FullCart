@@ -19,6 +19,8 @@ builder.Services.AddModelOptions(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors();
+
 var app = builder.Build();
 
 // Seed data
@@ -30,6 +32,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(x => x.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyHeader());
 
 app.UseHttpsRedirection();
 

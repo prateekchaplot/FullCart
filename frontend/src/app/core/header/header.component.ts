@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { StorageService } from '../../shared/services/storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -7,4 +9,11 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
   title = 'Full Cart';
+
+  constructor(private storageService: StorageService, private router: Router) {}
+
+  onLogout() {
+    this.storageService.removeToken();
+    this.router.navigate(['/login']);
+  }
 }

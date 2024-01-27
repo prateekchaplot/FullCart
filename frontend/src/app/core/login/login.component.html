@@ -10,8 +10,8 @@
             matInput
             placeholder="Email"
             name="email"
-            />
-            <!-- [(ngModel)]="email" -->
+            [(ngModel)]="email"
+          />
         </mat-form-field>
         <mat-form-field>
           <input
@@ -19,15 +19,16 @@
             type="password"
             placeholder="Password"
             name="password"
-            />
-            <!-- [(ngModel)]="password" -->
+            autocomplete="off"
+            [(ngModel)]="password"
+          />
         </mat-form-field>
         <button
           mat-raised-button
           color="primary"
           type="button"
+          (click)="onLogin()"
           >
-          <!-- (click)="onLogin()" -->
           Login
         </button>
       </form>
