@@ -13,5 +13,8 @@ public class Profiles : Profile
 
         CreateMap<BrandDto, Brand>()
         .ForMember(b => b.Image, opt => opt.MapFrom(dto => Convert.FromBase64String(dto.Image)));
+
+        CreateMap<CategoryDto, Category>()
+        .ForMember(b => b.Image, opt => opt.MapFrom(dto => Convert.FromBase64String(dto.Image)));
     }
 }

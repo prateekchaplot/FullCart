@@ -7,4 +7,5 @@ public class DataContext(DbContextOptions<DataContext> dbContext) : DbContext (d
 {
     public DbSet<User> Users => Set<User>();
     public DbSet<Brand> Brands => Set<Brand>();
+    public DbSet<Category> Categories => Set<Category>();
 }

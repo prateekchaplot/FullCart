@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Backend.Dtos;
 
-public class BrandDto
+public class CategoryDto
 {
     public Guid Id { get; set; } = Guid.NewGuid();
 

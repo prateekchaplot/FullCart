@@ -14,6 +14,7 @@ public static class Seeder
 
         context.AddAdminUser();
         context.AddBrands(client);
+        context.AddCategories(client);
     }
 
     private static void AddAdminUser(this DataContext context)
@@ -47,6 +48,24 @@ public static class Seeder
 
         var brands = fakeBrand.Generate(5);
         context.Brands.AddRange(brands);
+        context.SaveChanges();
+    }
+
+    private static void AddCategories(this DataContext context, HttpClient httpClient)
+    {
+        if (context.Brands.Any()) return;
+
+        var fakeCategory = new Faker<Category>()
+        .RuleFor(x => x.Id, f => Guid.NewGuid())
+        .RuleFor(x => x.CreatedAt, f => f.Date.Past(0))
+        .RuleFor(x => x.Name, f => f.Commerce.Categories(1).First())
+        .RuleFor(x => x.Image, f => {
+            var url = f.Image.PicsumUrl(120, 90);
+            return httpClient.GetByteArrayAsync(url).GetAwaiter().GetResult();
+        });
+
+        var categories = fakeCategory.Generate(5);
+        context.Categories.AddRange(categories);
         context.SaveChanges();
     }
 }
