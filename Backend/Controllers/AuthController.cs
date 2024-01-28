@@ -14,7 +14,7 @@ namespace Backend.Controllers;
 
 [AllowAnonymous]
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class AuthController(IUserRepository userRepository, IMapper mapper) : ControllerBase
 {
     private readonly IUserRepository _userRepository = userRepository;

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Backend.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class BrandController(IBrandRepository brandRepository, IMapper mapper) : ControllerBase
 {
     private readonly IBrandRepository _brandRepository = brandRepository;
