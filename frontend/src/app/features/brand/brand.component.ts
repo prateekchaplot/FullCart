@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../../shared/components/dialog/dialog.component';
+import { BrandService } from '../../shared/services/brand.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-brand',
@@ -9,24 +11,31 @@ import { DialogComponent } from '../../shared/components/dialog/dialog.component
 })
 export class BrandComponent {
   columns = ['id', 'name', 'actions'];
-  dataSource: any = [
-    { id: 1, name: 'Audi' },
-    { id: 2, name: 'BMW' },
-    { id: 3, name: 'Ford' },
-  ];
+  dataSource: any[] = [];
 
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, private brandService: BrandService) {
+    this.fetchBrands();
+  }
 
-  openDialog() {
+  openDialog(brand: any) {
     const dialogRef = this.dialog.open(DialogComponent, {
       data: {
-        title: 'Delete Brand',
-        description: 'Are you sure you want to delete the brand?'
+        title: 'Delete brand',
+        description: `Are you sure you want to delete the brand - ${brand.name}?`
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      if (result) 
+      this.brandService
+      .deleteBrand(brand.id)
+      .subscribe(() => window.location.reload());
+    });
+  }
+
+  fetchBrands() {
+    this.brandService.fetchBrands().subscribe(data => {
+      this.dataSource = data;
     });
   }
 }

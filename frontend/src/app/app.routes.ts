@@ -30,7 +30,7 @@ export const routes: Routes = [
     canActivate: [AuthGuard, AdminGuard]
   },
   {
-    path: 'brand',
+    path: 'brands',
     loadChildren: () => import('./features/brand/brand.module').then(m => m.BrandModule),
     canActivate: [AuthGuard, AdminGuard]
   },
