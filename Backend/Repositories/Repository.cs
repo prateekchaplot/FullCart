@@ -29,4 +29,9 @@ public abstract class Repository<T>(DataContext dataContext) : IRepository<T> wh
     {
         return await _set.AnyAsync(expression);
     }
+
+    public async Task<IEnumerable<T>> GetAllAsync()
+    {
+        return await _set.ToListAsync();
+    }
 }

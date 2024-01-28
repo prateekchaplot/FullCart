@@ -12,6 +12,7 @@ builder.Services.AddDbContext<DataContext>(x => x.UseSqlServer(connStr));
 // Add services to the container.
 builder.Services.AddRepositories();
 builder.Services.AddControllers();
+builder.Services.AddHttpClient();
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddModelOptions(builder.Configuration);
 

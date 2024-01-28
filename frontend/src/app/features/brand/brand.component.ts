@@ -20,7 +20,7 @@ export class BrandComponent {
   openDialog() {
     const dialogRef = this.dialog.open(DialogComponent, {
       data: {
-        title: 'Delete brand',
+        title: 'Delete Brand',
         description: 'Are you sure you want to delete the brand?'
       }
     });

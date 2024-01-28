@@ -11,5 +11,7 @@ public interface IRepository<T> where T : Base
 
     Task<T?> FirstOrDefaultAsync(Expression<Func<T, bool>> expression);
 
+    Task<IEnumerable<T>> GetAllAsync();
+
     Task SaveAsync();
 }
