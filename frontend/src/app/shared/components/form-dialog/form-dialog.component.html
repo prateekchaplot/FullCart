@@ -10,7 +10,7 @@
       <img *ngIf="item.value != ''" alt="Brand image" width="120" [src]="'data:image/png;base64,' + item.value">
       <p *ngIf="item.value == ''" class="mb-0">Upload image</p>
 
-      <input type="file" accept=".png, .jpg, .jpeg" class="d-none" #fileUpload />
+      <input type="file" accept=".png, .jpg, .jpeg" class="d-none" #fileUpload (change)="onFileSelected($event)" />
       <button (click)="fileUpload.click()" mat-mini-fab color="primary"><mat-icon>attach_file</mat-icon></button>
     </div>
   </ng-container>

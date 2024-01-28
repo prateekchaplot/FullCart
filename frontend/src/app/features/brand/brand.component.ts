@@ -87,10 +87,9 @@ export class BrandComponent {
       image: data.image
     };
 
-    // this.brandService
-    // .createBrand(payload)
-    // .subscribe();
-    console.log(payload);
+    this.brandService
+    .createBrand(payload)
+    .subscribe(() => window.location.reload());
   }
 
   updateBrand(data: any) {

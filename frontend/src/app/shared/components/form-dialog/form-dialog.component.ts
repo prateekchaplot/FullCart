@@ -24,4 +24,22 @@ export class FormDialogComponent {
       image: this.dialogData?.formData?.find(x => x.name == 'Image')?.value,
     } });
   }
+
+  async onFileSelected(event: any) {
+    const toBase64 = (file: File): Promise<string> => new Promise((resolve, reject) => {
+      const reader: FileReader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = reject;
+    });
+
+    const file = event.target.files[0];
+    let dataURI = await toBase64(file);
+
+    var base64Index = dataURI.indexOf(';base64,') + ';base64,'.length;
+    var base64 = dataURI.substring(base64Index);
+
+    let img = this.data.formData.find(x => x.name == 'Image');
+    if (img) img.value = base64;
+  }
 }
