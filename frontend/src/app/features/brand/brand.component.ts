@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../../shared/components/dialog/dialog.component';
 import { BrandService } from '../../shared/services/brand.service';
-import { Router } from '@angular/router';
+import { AppService } from '../../shared/services/app.service';
+import { DrawerDataType } from '../../shared/models/drawer-data';
 
 @Component({
   selector: 'app-brand',
@@ -13,7 +14,7 @@ export class BrandComponent {
   columns = ['id', 'name', 'actions'];
   dataSource: any[] = [];
 
-  constructor(private dialog: MatDialog, private brandService: BrandService) {
+  constructor(private dialog: MatDialog, private brandService: BrandService, private appService: AppService) {
     this.fetchBrands();
   }
 
@@ -37,5 +38,27 @@ export class BrandComponent {
     this.brandService.fetchBrands().subscribe(data => {
       this.dataSource = data;
     });
+  }
+
+  editBrand(brand: any) {
+    // this.appService.toggleDrawer$.next({
+    //   title: 'Edit Brand',
+    //   buttonLabel: 'Update',
+    //   data: [
+    //     { name: 'Image', value: brand.image, type: DrawerDataType.IMAGE },
+    //     { name: 'Name', value: brand.name, type: DrawerDataType.TEXT },
+    //   ]
+    // });
+  }
+
+  createBrand() {
+    // this.appService.toggleDrawer$.next({
+    //   title: 'Create Brand',
+    //   buttonLabel: 'Insert',
+    //   data: [
+    //     { name: 'Image', value: '', type: DrawerDataType.IMAGE },
+    //     { name: 'Name', value: '', type: DrawerDataType.TEXT },
+    //   ]
+    // });
   }
 }
