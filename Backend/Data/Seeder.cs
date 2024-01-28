@@ -53,7 +53,7 @@ public static class Seeder
 
     private static void AddCategories(this DataContext context, HttpClient httpClient)
     {
-        if (context.Brands.Any()) return;
+        if (context.Categories.Any()) return;
 
         var fakeCategory = new Faker<Category>()
         .RuleFor(x => x.Id, f => Guid.NewGuid())
