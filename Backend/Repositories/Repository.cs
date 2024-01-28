@@ -39,4 +39,9 @@ public abstract class Repository<T>(DataContext dataContext) : IRepository<T> wh
     {
         _set.Remove(entity);
     }
+
+    public void Update(T entity)
+    {
+        _set.Update(entity);
+    }
 }

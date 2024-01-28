@@ -16,4 +16,6 @@ public interface IRepository<T> where T : Base
     Task<IEnumerable<T>> GetAllAsync();
 
     Task SaveAsync();
+
+    void Update(T entity);
 }

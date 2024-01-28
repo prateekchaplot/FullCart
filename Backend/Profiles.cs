@@ -9,5 +9,6 @@ public class Profiles : Profile
     public Profiles()
     {
         CreateMap<RegisterDto, User>();
+        CreateMap<BrandDto, Brand>();
     }
 }
