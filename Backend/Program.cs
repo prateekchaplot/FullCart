@@ -1,5 +1,6 @@
 using System.Text;
 using Backend.Data;
+using Backend.Enums;
 using Backend.Models;
 using Backend.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -15,7 +16,7 @@ builder.Services.AddDbContext<DataContext>(x => x.UseSqlServer(connStr));
 // Configure AppSettings
 builder.Configuration.Bind(AppSettings.GetInstance());
 
-// Add Authorization
+// Add Authentication
 builder.Services
 .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 .AddJwtBearer(options =>
@@ -33,6 +34,11 @@ builder.Services
         IssuerSigningKey = new SymmetricSecurityKey(keyInBytes)
     };
 });
+
+// Add Authorization
+builder.Services
+.AddAuthorizationBuilder()
+.AddPolicy(nameof(AuthPolicy.ADMIN), policy => policy.RequireRole(nameof(UserRole.ADMIN)));
 
 // Add services to the container.
 builder.Services.AddRepositories();

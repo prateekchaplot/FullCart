@@ -34,4 +34,9 @@ public abstract class Repository<T>(DataContext dataContext) : IRepository<T> wh
     {
         return await _set.ToListAsync();
     }
+
+    public void Delete(T entity)
+    {
+        _set.Remove(entity);
+    }
 }
