@@ -1,1 +1,37 @@
-<p>brand works!</p>
+<div id="brand">
+  <div class="flex-style">
+    <!-- style="display: flex;" -->
+    <h2 class="label">Brands</h2>
+    <button class="button-row" mat-flat-button color="primary">Create</button>
+  </div>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>#</th>
+      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Action(s)</th>
+      <td mat-cell *matCellDef="let element">
+        <div class="button-row">
+          <div class="flex-container">
+            <button mat-icon-button>
+              <mat-icon color="accent">edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="openDialog()">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+    <tr mat-row *matRowDef="let row; columns: columns"></tr>
+  </table>
+</div>

@@ -9,11 +9,18 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatCardModule} from '@angular/material/card';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatTableModule} from '@angular/material/table';
+import { DialogComponent } from './components/dialog/dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    DialogComponent
+  ],
   imports: [
-    CommonModule
+    CommonModule,
+    MatDialogModule,
+    MatButtonModule
   ],
   exports: [
     MatButtonModule,
@@ -23,7 +30,9 @@ import {MatMenuModule} from '@angular/material/menu';
     MatToolbarModule,
     MatCardModule,
     MatChipsModule,
-    MatMenuModule
+    MatMenuModule,
+    MatTableModule,
+    DialogComponent
   ]
 })
 export class SharedModule { }

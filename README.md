@@ -7,3 +7,7 @@ An e-commerce application.
 
 ## Frontend
 `ng s`
+
+### References
+- [Angular Material](https://material.angular.io/)
+- [Google Fonts](https://fonts.google.com/icons)

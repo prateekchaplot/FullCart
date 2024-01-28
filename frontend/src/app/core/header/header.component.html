@@ -9,7 +9,7 @@
     </div>
     <span class="spacer"></span>
     <span *ngIf="isLoggedIn" class="user-info">{{ user?.email }}</span>
-    <mat-chip-option *ngIf="isLoggedIn" class="user-info">{{ user?.role | titlecase }}</mat-chip-option>
+    <mat-chip *ngIf="isLoggedIn" class="user-info">{{ user?.role | titlecase }}</mat-chip>
     <div class="button-row">
       <a *ngIf="!isLoggedIn" mat-flat-button href="register">Register</a>
       <a *ngIf="!isLoggedIn" mat-flat-button href="login" color="primary">Login</a>
