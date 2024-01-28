@@ -3,7 +3,7 @@
   <ng-container *ngFor="let item of dialogData?.formData">
     <mat-form-field *ngIf="item.type == 0" class="pt-8 pb-8">
       <mat-label>{{ item.name }}</mat-label>
-      <input type="text" matInput [value]="item.value" />
+      <input type="text" matInput [(ngModel)]="item.value" />
     </mat-form-field>
 
     <div *ngIf="item.type == 1" class="flex-display pb-8">
@@ -19,5 +19,4 @@
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close cdkFocusInitial [mat-dialog-close]="false">No</button>
   <button mat-button (click)="onClick()">{{ dialogData?.btnLabel }}</button>
-  <!-- mat-dialog-close [mat-dialog-close]="true" -->
 </div>

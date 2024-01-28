@@ -55,9 +55,10 @@ public class BrandController(IBrandRepository brandRepository, IMapper mapper) :
         if (brand == null) return BadRequest("Invalid brand");
 
         var brandToUpdate = _mapper.Map<Brand>(dto);
-        brandToUpdate.CreatedAt = brand.CreatedAt;
+        brand.Name = brandToUpdate.Name;
+        brand.Image = brandToUpdate.Image;
 
-        _brandRepository.Update(brandToUpdate);
+        _brandRepository.Update(brand);
         await _brandRepository.SaveAsync();
         return Ok();
     }

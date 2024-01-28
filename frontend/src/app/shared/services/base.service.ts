@@ -25,6 +25,11 @@ export class BaseService {
     return this.http.post(this.baseUrl + url, body, { headers });
   }
 
+  securePut(url: string, body: any): Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.put(this.baseUrl + url, body, { headers });
+  }
+
   secureDelete(url: string): Observable<any> {
     const headers = this.getHeaders();
     return this.http.delete(this.baseUrl + url, { headers });

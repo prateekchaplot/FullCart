@@ -11,5 +11,5 @@ public class BrandDto
     public string Name { get; set; } = string.Empty;
 
     [Required]
-    public byte[] Image { get; set; } = [];
+    public string Image { get; set; } = string.Empty;   //[];
 }

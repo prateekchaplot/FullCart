@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../../shared/components/dialog/dialog.component';
 import { BrandService } from '../../shared/services/brand.service';
-import { AppService } from '../../shared/services/app.service';
 import { FormItemType } from '../../shared/models/form-dialog-data';
 import { FormDialogComponent } from '../../shared/components/form-dialog/form-dialog.component';
 
@@ -15,7 +14,7 @@ export class BrandComponent {
   columns = ['id', 'name', 'actions'];
   dataSource: any[] = [];
 
-  constructor(private dialog: MatDialog, private brandService: BrandService, private appService: AppService) {
+  constructor(private dialog: MatDialog, private brandService: BrandService) {
     this.fetchBrands();
   }
 
@@ -41,7 +40,7 @@ export class BrandComponent {
     });
   }
 
-  editBrand(brand: any) {
+  onEditBrand(brand: any) {
     const dialogRef = this.dialog.open(FormDialogComponent, {
       data: {
         title: 'Edit brand',
@@ -49,6 +48,7 @@ export class BrandComponent {
         formData: [
           { name: 'Image', value: brand.image, type: FormItemType.IMAGE },
           { name: 'Name', value: brand.name, type: FormItemType.TEXT },
+          { name: 'Id', value: brand.id, type: FormItemType.HIDDEN },
         ]
       }
     });
@@ -56,7 +56,7 @@ export class BrandComponent {
     dialogRef.afterClosed().subscribe(result => this.afterDialogClosed(result));
   }
 
-  createBrand() {
+  onCreateBrand() {
     const dialogRef = this.dialog.open(FormDialogComponent, {
       data: {
         title: 'Create brand',
@@ -72,12 +72,36 @@ export class BrandComponent {
   }
 
   afterDialogClosed(result: any) {
-    if (result.data.type == 'Update') {
-      console.log('Update');
+    if (result?.data?.type == 'Update') {
+      this.updateBrand(result.data);
     }
 
-    if (result.data.type == 'Insert') {
-      console.log('Insert');
+    if (result?.data?.type == 'Insert') {
+      this.createBrand(result.data);
     }
+  }
+
+  createBrand(data: any) {
+    const payload = {
+      name: data.name,
+      image: data.image
+    };
+
+    // this.brandService
+    // .createBrand(payload)
+    // .subscribe();
+    console.log(payload);
+  }
+
+  updateBrand(data: any) {
+    const payload = {
+      id: data.id,
+      name: data.name,
+      image: data.image,
+    };
+
+    this.brandService
+    .updateBrand(payload)
+    .subscribe(() => window.location.reload());
   }
 }

@@ -16,4 +16,12 @@ export class BrandService {
   deleteBrand(id: string): Observable<any> {
     return this.baseService.secureDelete(`/brand?id=${id}`);
   }
+
+  createBrand(data: any): Observable<any> {
+    return this.baseService.securePost('/brand', data);
+  }
+
+  updateBrand(data: any): Observable<any> {
+    return this.baseService.securePut('/brand', data);
+  }
 }

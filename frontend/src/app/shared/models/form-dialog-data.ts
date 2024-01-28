@@ -6,7 +6,8 @@ export interface FormData {
 
 export enum FormItemType {
   TEXT,
-  IMAGE
+  IMAGE,
+  HIDDEN
 }
 
 export interface FormDialogData {

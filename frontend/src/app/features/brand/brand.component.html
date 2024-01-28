@@ -1,7 +1,7 @@
 <div id="brand">
   <div class="flex-style">
     <h2 class="label">Brands</h2>
-    <button class="button-row" mat-flat-button color="primary" (click)="createBrand()">Create</button>
+    <button class="button-row" mat-flat-button color="primary" (click)="onCreateBrand()">Create</button>
   </div>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="id">
@@ -19,7 +19,7 @@
       <td mat-cell *matCellDef="let element">
         <div class="button-row">
           <div class="flex-container">
-            <button mat-icon-button (click)="editBrand(element)">
+            <button mat-icon-button (click)="onEditBrand(element)">
               <mat-icon color="accent">edit</mat-icon>
             </button>
             <button mat-icon-button color="warn" (click)="openDialog(element)">

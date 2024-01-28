@@ -15,6 +15,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { DialogComponent } from './components/dialog/dialog.component';
 import { FormDialogComponent } from './components/form-dialog/form-dialog.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { FormDialogComponent } from './components/form-dialog/form-dialog.compon
   ],
   imports: [
     CommonModule,
+    FormsModule,
     MatDialogModule,
     MatSidenavModule,
     MatButtonModule,
