@@ -3,7 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../../shared/components/dialog/dialog.component';
 import { BrandService } from '../../shared/services/brand.service';
 import { AppService } from '../../shared/services/app.service';
-import { DrawerDataType } from '../../shared/models/drawer-data';
+import { FormItemType } from '../../shared/models/form-dialog-data';
+import { FormDialogComponent } from '../../shared/components/form-dialog/form-dialog.component';
 
 @Component({
   selector: 'app-brand',
@@ -41,24 +42,42 @@ export class BrandComponent {
   }
 
   editBrand(brand: any) {
-    // this.appService.toggleDrawer$.next({
-    //   title: 'Edit Brand',
-    //   buttonLabel: 'Update',
-    //   data: [
-    //     { name: 'Image', value: brand.image, type: DrawerDataType.IMAGE },
-    //     { name: 'Name', value: brand.name, type: DrawerDataType.TEXT },
-    //   ]
-    // });
+    const dialogRef = this.dialog.open(FormDialogComponent, {
+      data: {
+        title: 'Edit brand',
+        btnLabel: 'Update',
+        formData: [
+          { name: 'Image', value: brand.image, type: FormItemType.IMAGE },
+          { name: 'Name', value: brand.name, type: FormItemType.TEXT },
+        ]
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => this.afterDialogClosed(result));
   }
 
   createBrand() {
-    // this.appService.toggleDrawer$.next({
-    //   title: 'Create Brand',
-    //   buttonLabel: 'Insert',
-    //   data: [
-    //     { name: 'Image', value: '', type: DrawerDataType.IMAGE },
-    //     { name: 'Name', value: '', type: DrawerDataType.TEXT },
-    //   ]
-    // });
+    const dialogRef = this.dialog.open(FormDialogComponent, {
+      data: {
+        title: 'Create brand',
+        btnLabel: 'Insert',
+        formData: [
+          { name: 'Image', value: '', type: FormItemType.IMAGE },
+          { name: 'Name', value: '', type: FormItemType.TEXT },
+        ]
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => this.afterDialogClosed(result));
+  }
+
+  afterDialogClosed(result: any) {
+    if (result.data.type == 'Update') {
+      console.log('Update');
+    }
+
+    if (result.data.type == 'Insert') {
+      console.log('Insert');
+    }
   }
 }

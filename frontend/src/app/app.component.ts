@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
-import { MatDrawer } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-root',

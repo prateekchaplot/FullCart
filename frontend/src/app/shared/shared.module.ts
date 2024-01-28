@@ -14,10 +14,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { DialogComponent } from './components/dialog/dialog.component';
+import { FormDialogComponent } from './components/form-dialog/form-dialog.component';
 
 @NgModule({
   declarations: [
     DialogComponent,
+    FormDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -44,6 +46,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
     MatMenuModule,
     MatTableModule,
     DialogComponent,
+    FormDialogComponent
   ]
 })
 export class SharedModule { }

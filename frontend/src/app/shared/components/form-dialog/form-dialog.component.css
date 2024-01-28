@@ -1,0 +1,17 @@
+.flex-display {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pt-8 {
+  padding-top: 8px;
+}
+
+.pb-8 {
+  padding-bottom: 8px;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}
