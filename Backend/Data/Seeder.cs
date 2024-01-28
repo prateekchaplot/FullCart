@@ -41,8 +41,7 @@ public static class Seeder
         .RuleFor(x => x.CreatedAt, f => f.Date.Past(0))
         .RuleFor(x => x.Name, f => f.Company.CompanyName(0))
         .RuleFor(x => x.Image, f => {
-            var url = f.Image.PicsumUrl();
-            Console.WriteLine("URL: {0}", url);
+            var url = f.Image.PicsumUrl(120, 90);
             return httpClient.GetByteArrayAsync(url).GetAwaiter().GetResult();
         });
 
