@@ -1,7 +1,10 @@
+using System.Text;
 using Backend.Data;
 using Backend.Models;
 using Backend.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,12 +12,33 @@ var builder = WebApplication.CreateBuilder(args);
 var connStr = builder.Configuration.GetConnectionString("Database") ?? throw new Exception();
 builder.Services.AddDbContext<DataContext>(x => x.UseSqlServer(connStr));
 
+// Configure AppSettings
+builder.Configuration.Bind(AppSettings.GetInstance());
+
+// Add Authorization
+builder.Services
+.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+.AddJwtBearer(options =>
+{
+    var jwtOptions = AppSettings.GetInstance().JwtOptions;
+    var keyInBytes = Encoding.UTF8.GetBytes(jwtOptions.Key);
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = false,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = jwtOptions.Issuer,
+        ValidAudience = jwtOptions.Audience,
+        IssuerSigningKey = new SymmetricSecurityKey(keyInBytes)
+    };
+});
+
 // Add services to the container.
 builder.Services.AddRepositories();
 builder.Services.AddControllers();
 builder.Services.AddHttpClient();
 builder.Services.AddAutoMapper(typeof(Program));
-builder.Services.AddModelOptions(builder.Configuration);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -40,6 +64,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapControllers()
+.RequireAuthorization();
 
 app.Run();
