@@ -6,5 +6,6 @@ public static partial class Configuration
     {
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IBrandRepository, BrandRepository>();
+        services.AddScoped<ICategoryRepository, CategoryRepository>();
     }
 }
